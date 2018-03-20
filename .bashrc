@@ -41,7 +41,7 @@ parse_git_branch() {
 }
 
 parse_git_repo() {
-   git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([a-z_]*\)\( \).*/\2/'
+   git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([A-Za-z_]*\)\([ \.]\).*/\2/'
 }
 
 git_info() {
@@ -78,7 +78,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][\A] \[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\W\[\033[01;35m\]$(git_info)\[\033[00m\]\$ '
+   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][\A] \[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\W\[\033[01;33m\]$(git_info)\[\033[01;37m\]\$\[\033[00m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
