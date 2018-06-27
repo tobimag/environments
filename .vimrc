@@ -6,11 +6,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/Townk/vim-autoclose'
+Plug 'scrooloose/nerdtree', {'on':  'NERDTreeToggle'}
 call plug#end()
 
 map <Tab> <C-W>w
 map <Bar> <C-W>v<C-W><Right>
 map -     <C-W>s<C-W><Down>
+map <C-n> :NERDTreeToggle<CR>
 
 set expandtab
 set shiftwidth=3
