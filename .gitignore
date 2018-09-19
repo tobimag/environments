@@ -1,2 +1,5 @@
 # Ignore temporary vim buffer files
 *.swp
+
+# Ignore pycharm project
+.idea/
