@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 usage() { echo -n "$0 [OPTION]...
 
  Options:
@@ -8,6 +7,8 @@ usage() { echo -n "$0 [OPTION]...
  -g     replace .gitconfig
  -v     replace .vimrc
 "; exit 0; }
+
+[ $# -eq 0 ] && usage
 
 while getopts "bgv" o; do
     case "${o}" in
@@ -23,8 +24,6 @@ while getopts "bgv" o; do
     esac
 done
 shift $((OPTIND-1))
-
-[ $# -eq 0 ] && usage
 
 [ ! -z $b ] && ln -s $(pwd)/.bashrc ~/.bashrc --backup
 [ ! -z $g ] && ln -s $(pwd)/.gitconfig ~/.gitconfig --backup
