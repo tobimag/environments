@@ -42,7 +42,7 @@ parse_git_branch() {
 
 parse_git_repo() {
    #git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([A-Za-z_.-]*\)\([ \.]\).*/\2/'
-   git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([A-Za-z_-]*\)\(.git\)\([ \.]\).*/\2/'
+   git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([A-Za-z_-]*\)\(.git\)\{0,1\}\([ \.]\).*/\2/'
 }
 
 git_info() {
