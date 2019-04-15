@@ -137,3 +137,22 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# fix for lightline tmux colors
+TERM=screen-256color
+
+if [ -f ~/.bashrc_local ]; then
+   . ~/.bashrc_local
+fi
+
+eval $(thefuck --alias)
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+if [ -f ~/.sdkman_init ]; then
+   . ~/.sdkman_init
+fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+#export SDKMAN_DIR="/home/tobiasmagnusson/.sdkman"
+#[[ -s "/home/tobiasmagnusson/.sdkman/bin/sdkman-init.sh" ]] && source "/home/tobiasmagnusson/.sdkman/bin/sdkman-init.sh"
+
