@@ -4,7 +4,11 @@
 	ci = commit
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	rb = rebase
-	st = status
+        st = status
+	branch-cleanup = "!git fetch origin --prune && git checkout master && git branch --merged origin/master | grep -v '^* master$' | xargs git branch -d"
+	high-score = shortlog -s -n
+	fap = fetch --all --prune
+
 [push]
 	default = simple
 [core]
@@ -13,3 +17,5 @@
 	submodulesummary = true
 [diff]
 	submodule = log
+[init]
+	templatedir = ~/.git-templates
