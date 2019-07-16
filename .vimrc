@@ -7,6 +7,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/Townk/vim-autoclose'
 Plug 'scrooloose/nerdtree', {'on':  'NERDTreeToggle'}
+Plug 'https://github.com/danro/rename.vim'
 call plug#end()
 
 map <Tab> <C-W>w
@@ -21,3 +22,5 @@ set smartindent
 
 let NERDTreeShowHidden=1
 
+" Display filename
+set laststatus=2
