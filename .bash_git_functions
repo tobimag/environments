@@ -1,0 +1,20 @@
+# find name of current git branch if wd is a git repository
+parse_git_branch() {
+   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+parse_git_repo() {
+   #git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([A-Za-z_.-]*\)\([ \.]\).*/\2/'
+   git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([A-Za-z_-]*\)\(.git\)\{0,1\}\([ \.]\).*/\2/'
+}
+
+git_info() {
+   branch=$(parse_git_branch)
+   repo=$(parse_git_repo)
+   
+   if [ -n "$branch" ] & [ -n "$repo" ]; then
+      echo " ($branch@$repo) "
+   else
+     echo " " 
+   fi
+}

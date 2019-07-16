@@ -35,27 +35,10 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# find name of current git branch if wd is a git repository
-parse_git_branch() {
-   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
-
-parse_git_repo() {
-   #git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([A-Za-z_.-]*\)\([ \.]\).*/\2/'
-   git remote -vv 2> /dev/null | head -n1 | sed 's/.*\(\/\)\([A-Za-z_-]*\)\(.git\)\{0,1\}\([ \.]\).*/\2/'
-}
-
-git_info() {
-   branch=$(parse_git_branch)
-   repo=$(parse_git_repo)
-   
-   if [ -n "$branch" ] & [ -n "$repo" ]; then
-      echo " ($branch@$repo) "
-   else
-     echo " " 
-   fi
-
-}
+# Get git functions for bash prompt, if exists
+if [ -f ~/.bash_git_functions ]; then
+   . ~/.bash_git_functions
+fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -79,7 +62,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\][\A] \[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\W\[\033[01;33m\]$(git_info)\[\033[01;37m\]\$\[\033[00m\] '
+   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\W\[\033[01;33m\]$(git_info)\n\[\033[01;31m\][\A] \[\033[01;37m\]\$\[\033[00m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
