@@ -8,7 +8,18 @@
 	branch-cleanup = "!git fetch origin --prune && git checkout master && git branch --merged origin/master | grep -v '^* master$' | xargs git branch -d"
 	high-score = shortlog -s -n
         fap = fetch --all --prune
-        update = "!git fap && git pull && git submodule update --recursive"
+        update-local = "!git fap && git pull && git submodule update --recursive"
+        smi = submodule update --init --recursive
+        current-branch = rev-parse --abbrev-ref HEAD
+        cb = "!git current-branch"
+        push-branch = "!git push origin $(git current-branch)"
+        pb = "!git push-branch"
+        push-force-branch = "!git push-branch --force"
+        pfb = "!git push-force-branch"
+        add-all-commit-push = "!git add . && git commit && git push-branch"
+        aacp = "!git add-all-commit-push"
+        add-all-amend-push-force = "!git add . && git commit --amend --no-edit && git push-force-branch"
+        aaapf = "!git add-all-amend-push-force"
 
 [push]
 	default = simple
